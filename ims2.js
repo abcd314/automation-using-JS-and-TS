@@ -1,11 +1,14 @@
 const puppeteer = require('puppeteer');
 const loginPage={
     signInWithGoogle:'button[class="google-btn"]',
-    menuIcon:'#app > div > div:nth-child(1) > div > header > div > button',
-    imsBtn:'body > div.MuiDrawer-root.MuiDrawer-modal.sidebar > div.MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.MuiPaper-elevation16 > div > div.w-350 > ul:nth-child(2) > a:nth-child(10) > div'
-        
+      
 }
 
+const erpPage={
+    menuIcon:'#app > div > div:nth-child(1) > div > header > div > button',
+    imsBtn:'body > div.MuiDrawer-root.MuiDrawer-modal.sidebar > div.MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.MuiPaper-elevation16 > div > div.w-350 > ul:nth-child(2) > a:nth-child(10) > div'
+  
+}
 const emailPage={
     emailTxt:'input[type=email]',
     nextBtn:'#identifierNext > div > button'
@@ -49,27 +52,27 @@ puppeteer.launch({headless:false}).then (async browser=>{
     await page.waitFor(2000);
     const newPagePromise1=new Promise(x => browser.once('targetcreated', target => x(target.page())));
     await page.click(loginPage.signInWithGoogle);
-    const popup1 = await newPagePromise1;
-    await popup1.waitFor(emailPage.emailTxt);
-    await popup1.type(emailPage.emailTxt,"kalyani.pagare@afourtech.com");
-    await popup1.click(emailPage.nextBtn);
-    await popup1.waitFor(5000);
-    await popup1.waitFor(passwordPage.passwordTxt);
-    await popup1.type(passwordPage.passwordTxt,"afour@28");
-    await popup1.click(passwordPage.nextBtn);
-    await popup1.waitFor(5000);
-    await popup1.waitFor(passwordPage.allowBtn);
-    await popup1.click(passwordPage.allowBtn);
-    await popup1.waitFor(5000);
+    const page2 = await newPagePromise1;
+    await page2.waitFor(emailPage.emailTxt);
+    await page2.type(emailPage.emailTxt,"kalyani.pagare@afourtech.com");
+    await page2.click(emailPage.nextBtn);
+    await page2.waitFor(5000);
+    await page2.waitFor(passwordPage.passwordTxt);
+    await page2.type(passwordPage.passwordTxt,"afour@28");
+    await page2.click(passwordPage.nextBtn);
+    await page2.waitFor(5000);
+    await page2.waitFor(passwordPage.allowBtn);
+    await page2.click(passwordPage.allowBtn);
+    await page2.waitFor(5000);
 
     //Click on Menu Icon
-    await page.waitFor(loginPage.menuIcon);
-    await page.click(loginPage.menuIcon);
+    await page.waitFor(erpPage.menuIcon);
+    await page.click(erpPage.menuIcon);
 
-    await page.waitFor(loginPage.imsBtn);
+    await page.waitFor(erpPage.imsBtn);
     const imsTabPromise=new Promise(x1 => browser.once('targetcreated', target => x1(target.page())));
     //click on ims btn
-    await page.click(loginPage.imsBtn);
+    await page.click(erpPage.imsBtn);
     const imsPage = await imsTabPromise;
 
     //click on create Requirement
@@ -91,6 +94,6 @@ puppeteer.launch({headless:false}).then (async browser=>{
 
     await page.waitFor(3000);
 
-    await browser.close();
+    // await browser.close();
 
 });

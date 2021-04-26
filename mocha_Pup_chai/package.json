@@ -1,0 +1,17 @@
+{
+  "name": "mocha_pup_chai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha --timeout=50000 ./tests"
+  },
+  "author": "KP",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^8.3.2",
+    "prettier": "^2.2.1",
+    "puppeteer": "^9.0.0"
+  }
+}
